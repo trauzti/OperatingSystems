@@ -6,7 +6,7 @@ leave:
    pop %ebp      <- put the oldebp into %ebp 
 
 ret:
-   pop %eip <- pops the return address from the 
+   pop %eip <- This is what happens. Normally you cannot write to %eip
 
 
 
