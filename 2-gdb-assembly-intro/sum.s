@@ -5,18 +5,17 @@
 sum:
 .LFB2:
 	.cfi_startproc
-	pushq	%rbp
-	.cfi_def_cfa_offset 16
-	.cfi_offset 6, -16
-	movq	%rsp, %rbp
-	.cfi_def_cfa_register 6
-	movl	%edi, -4(%rbp)
-	movl	%esi, -8(%rbp)
-	movl	-8(%rbp), %eax
-	movl	-4(%rbp), %edx
+	pushl	%ebp
+	.cfi_def_cfa_offset 8
+	.cfi_offset 5, -8
+	movl	%esp, %ebp
+	.cfi_def_cfa_register 5
+	movl	12(%ebp), %eax
+	movl	8(%ebp), %edx
 	addl	%edx, %eax
-	popq	%rbp
-	.cfi_def_cfa 7, 8
+	popl	%ebp
+	.cfi_restore 5
+	.cfi_def_cfa 4, 4
 	ret
 	.cfi_endproc
 .LFE2:
@@ -30,39 +29,38 @@ sum:
 main:
 .LFB3:
 	.cfi_startproc
-	pushq	%rbp
-	.cfi_def_cfa_offset 16
-	.cfi_offset 6, -16
-	movq	%rsp, %rbp
-	.cfi_def_cfa_register 6
-	pushq	%rbx
-	subq	$24, %rsp
-	.cfi_offset 3, -24
-	movl	%edi, -20(%rbp)
-	movq	%rsi, -32(%rbp)
-	movq	-32(%rbp), %rax
-	addq	$16, %rax
-	movq	(%rax), %rax
-	movq	%rax, %rdi
+	pushl	%ebp
+	.cfi_def_cfa_offset 8
+	.cfi_offset 5, -8
+	movl	%esp, %ebp
+	.cfi_def_cfa_register 5
+	pushl	%ebx
+	andl	$-16, %esp
+	subl	$16, %esp
+	.cfi_offset 3, -12
+	movl	12(%ebp), %eax
+	addl	$8, %eax
+	movl	(%eax), %eax
+	movl	%eax, (%esp)
 	call	atoi
 	movl	%eax, %ebx
-	movq	-32(%rbp), %rax
-	addq	$8, %rax
-	movq	(%rax), %rax
-	movq	%rax, %rdi
+	movl	12(%ebp), %eax
+	addl	$4, %eax
+	movl	(%eax), %eax
+	movl	%eax, (%esp)
 	call	atoi
-	movl	%ebx, %esi
-	movl	%eax, %edi
+	movl	%ebx, 4(%esp)
+	movl	%eax, (%esp)
 	call	sum
-	movl	%eax, %esi
-	movl	$.LC0, %edi
-	movl	$0, %eax
+	movl	%eax, 4(%esp)
+	movl	$.LC0, (%esp)
 	call	printf
 	movl	$0, %eax
-	addq	$24, %rsp
-	popq	%rbx
-	popq	%rbp
-	.cfi_def_cfa 7, 8
+	movl	-4(%ebp), %ebx
+	leave
+	.cfi_restore 5
+	.cfi_restore 3
+	.cfi_def_cfa 4, 4
 	ret
 	.cfi_endproc
 .LFE3:
