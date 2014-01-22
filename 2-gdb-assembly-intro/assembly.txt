@@ -1,0 +1,31 @@
+A great cheat sheet with the most common assembly commands
+http://www.stanford.edu/class/cs107/other/IA32_Cheat_Sheet.pdf
+
+leave: 
+   mov %esp,  %ebp <- release the stack frame
+   pop %ebp      <- put the oldebp into %ebp 
+
+ret:
+   pop %eip <- pops the return address from the 
+
+
+
+Stack frame layout after a call to a function with two arguments
+Assuming a 32 bit program.
+
+       [ arg2 ] ebp + 0xc
+       [ arg1 ] ebp + 0x8 
+       [ return address ]
+ebp -> [ old ebp ]
+       [stack frame for the current function] 
+       [...]
+esp -> [end of stack frame] 
+
+Note:
+  1) the ebp points to the first byte of 4 byte memory segment containing the old ebp
+  2) the esp points to the lowest memory address in use by this stack frame, 
+     1 byte below, at esp-1, is a memory address not in use
+
+%ebx, %esi, %edi <= must save the old value if you use them, and restore it before you return
+
+%eax, %edx, %ecx <= save to use them at will, if you call another function, it might change them
