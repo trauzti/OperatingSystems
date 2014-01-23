@@ -1,11 +1,9 @@
 === Start up gdb with a binary ===
 gdb <binary_name>
 
-=== Breakpoints ===
+=== Breakpoints / run until ===
 break <function_name> (example: "break main" or "break *0x08048414")
-
-=== Breakpoints ===
-Until <function_name> (example "until main" or "until *0x08048414")
+until <function_name> (example "until main" or "until *0x08048414")
 
 === Running === 
 r, run  -> start the program
