@@ -1,0 +1,5 @@
+# Run this on skel to save the gdbinit file in your home directory
+wget https://raw.github.com/trauzti/OperatingSystems/master/2-gdb-assembly-intro/gdbinit -O ~/.gdbinit
+
+# OR on skel
+cp /labs/gdbinit ~/.gdbinit

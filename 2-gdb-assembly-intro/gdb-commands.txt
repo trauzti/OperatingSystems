@@ -1,0 +1,32 @@
+=== Start up gdb with a binary ===
+gdb <binary_name>
+
+=== Breakpoints / run until ===
+break <function_name> (example: "break main" or "break *0x08048414")
+until <function_name> (example "until main" or "until *0x08048414")
+
+=== Running === 
+r, run  -> start the program
+
+=== Stepping ===
+ni, nexti -> steps over functions
+si, stepi -> steps into functions
+finish -> finsishes a function entered by stepi
+
+=== Continuing ===
+c, continue -> Start the program again after hitting a breakpoint
+
+=== Information ===
+info registers, i r -> Prints out all the registers and their contents
+info breakpoints, i b -> Prints out all breakpoints
+
+=== Printing values ===
+x/20a $esp -> print contents of the stack pointer and of 19 addresses after the stack pointer
+x/a $ebp -> print out the frame pointer and the address stored where it points
+x/4xb $eax -> print out the 4 bytes stored in the eax register
+x/s <address> -> print out a zero byte terminated string, first byte at address (example "x/s 0xffffd4f8")
+x/10i $eip -> prints out the next 10 instructions to run
+
+
+
+
