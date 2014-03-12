@@ -8,13 +8,20 @@
 unsigned long int sum = 0;
 pthread_mutex_t lock;
 
+#define USE_PTHREAD_LOCK 0
+
 void *func(void *argp)
 {
   unsigned long int j;
   int start = *( (int *) argp);
   for (j = start * PER_THREAD + 1; j <= (start+1) * PER_THREAD; j++) {
-    __sync_add_and_fetch(&sum, j);
+#if USE_PTHREAD_LOCK
+    pthread_mutex_lock(&lock);  // locks this region
     sum += j;
+    pthread_mutex_unlock(&lock);  // unlocks this region
+#else
+    __sync_add_and_fetch(&sum, j); // atomic add
+#endif
   }
   pthread_exit(NULL);
 }
